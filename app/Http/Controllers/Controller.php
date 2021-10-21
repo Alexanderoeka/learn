@@ -7,7 +7,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class Controller extends BaseController
+class Controller extends BaseController  // КХМ поза 69 )(
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 }
