@@ -54,4 +54,6 @@ Route::group(['namespace'=>'Blog\Admin','prefix'=>'admin/blog'],function(){
 
 
 // 13 урок в конце о глазах
+// В блог постах админки нумератор странный
+// Дебаг бар и IDE helper может шутить(кто его знает )
 //Lesson 36 time 22:00
