@@ -25,4 +25,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 // 13 урок в конце о глазах
-//Lesson 36 time 12:30
+//Lesson 36 time 22:00
