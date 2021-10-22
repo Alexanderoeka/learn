@@ -22,11 +22,11 @@
                         </div>
                         <div class="form-group">
                             <lable for="user">User</lable>
-                            <input name="user" value="{{ $item->user_id }}" id="slug" type="text" class="form-control">
+                            <input name="user_id" value="{{ $item->user_id }}" id="slug" type="text" class="form-control">
                         </div>
                         <div class="form-group">
                             <lable for="parent_id">Category</lable>
-                            <select name="parent_id" id="parent_id" class="form-control"
+                            <select name="category_id" id="parent_id" class="form-control"
                                 placeholder="choosen category" required>
                                 @foreach ($categoryList as $categoryOption)
                                     <option value="{{ $categoryOption->id }}" @if ($categoryOption->id == $item->category_id) selected @endif>
@@ -37,8 +37,8 @@
                         </div>
                         <div class="form-group">
                             <lable for="description">Content</lable>
-                            <textarea name="description" id="description" class="form-control" rows="3">
-                            {{ old('description', $item->content_raw) }}
+                            <textarea name="content_raw" id="description" class="form-control" rows="3">
+                            {{ old('content_raw', $item->content_raw) }}
                         </textarea>
                         </div>
                     </div>

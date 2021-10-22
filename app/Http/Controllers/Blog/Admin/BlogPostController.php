@@ -89,7 +89,17 @@ class BlogPostController extends BaseController
     public function update(BlogPostUpdateRequest $request, $id)
     {
         $data = $request->all();
-        dd($data);
+
+        $query = new BlogPost();
+        $uf = $query->fill($data)->save();
+        if($uf)
+        {
+            return redirect(route('admin.blog.posts.edit',$id))
+            ->with('');
+        }else{
+            return back()
+            ->withErrors('AAAAAAAA');
+        }
     }
 
     /**

@@ -20,5 +20,16 @@ class BlogPost extends Model
         // Статья пренадлежит пользователю
         return $this->belongsTo(User::class);
     }
+    protected $fillable
+    =[
+        'title',
+        'slug',
+        'parent_id',
+        'description',
+        'category_id',
+        'user_id',
+        'content_raw'
+
+    ];
 
 }

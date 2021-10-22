@@ -26,7 +26,6 @@ class BlogPostUpdateRequest extends FormRequest
         return [
             'title'=>'required|min:5|max:200',
             'slug'=>'max:200',
-            'description'=>'string|min:3|max:500',
             'category_id' =>'integer|required|exists:blog_categories,id',
             'user_id' => 'integer|required|exists:users,id',
             'content_raw' =>'string|min:3|max:5000',
