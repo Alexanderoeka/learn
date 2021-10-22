@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class UsersTableSeeder extends Seeder
 {
@@ -16,7 +17,7 @@ class UsersTableSeeder extends Seeder
             [
                 'name' => 'Author unknown',
                 'email' => 'author_unknown@u.n',
-                'password' => bcrypt(str_random(16)),
+                'password' => bcrypt(Str::random(16)),
 
             ],
             [

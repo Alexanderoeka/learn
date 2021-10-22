@@ -20,7 +20,7 @@ class BlogCategoriesTableSeeder extends Seeder
 
         $categories[] = [
             'title' => $cName,
-            'slug' => str_slug($cName),
+            'slug' => Str::slug($cName),
             'parent_id' => 0,
         ];
 
@@ -29,7 +29,7 @@ class BlogCategoriesTableSeeder extends Seeder
             $parentId = ($i > 5) ? rand(1, 5) : 1;
             $categories[] = [
                 'title' => $cName,
-                'slug' => str_slug($cName),
+                'slug' => Str::slug($cName),
                 'parent_id' => $parentId,
             ];
         }
