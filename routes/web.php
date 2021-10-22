@@ -51,4 +51,3 @@ Route::group($groupData, function () {
 Route::group(['namespace'=>'Blog\Admin','prefix'=>'admin/blog'],function(){
     Route::resource('posts','BlogPostController')->except('show')->names('admin.blog.posts');
 });
-
