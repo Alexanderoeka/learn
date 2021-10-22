@@ -3,16 +3,22 @@
 namespace App\Http\Controllers\Blog\Admin;
 
 use App\Models\BlogPost;
+use App\Repositories\BlogCategoryRepository;
 use App\Repositories\BlogPostRepository;
 use Illuminate\Http\Request;
+use App\Http\Requests\BlogPostUpdateRequest;
 
 class BlogPostController extends BaseController
 {
     private $blogPostRepository;
 
-    public function __construct(){
+    private $blogCategoryRepository;
+
+    public function __construct()
+    {
         parent::__construct();
         $this->blogPostRepository = app(BlogPostRepository::class);
+        $this->blogCategoryRepository = app(BlogCategoryRepository::class);
     }
     /**
      * Display a listing of the resource.
@@ -24,7 +30,7 @@ class BlogPostController extends BaseController
     {
         $postsList = $this->blogPostRepository->getPaginateForList(10);
 
-        return view('blog.admin.post.index',compact('postsList'));
+        return view('blog.admin.post.index', compact('postsList'));
     }
 
     /**
@@ -67,7 +73,10 @@ class BlogPostController extends BaseController
      */
     public function edit($id)
     {
-        dd($this->blogPostRepository->getDataofPostbyId($id));
+        $item = $this->blogPostRepository->getforEdit($id);
+        $categoryList = $this->blogCategoryRepository->getForComboBox();
+
+        return view('blog.admin.post.edit', compact('item', 'categoryList'));
     }
 
     /**
@@ -77,9 +86,10 @@ class BlogPostController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BlogPostUpdateRequest $request, $id)
     {
-        //
+        $data = $request->all();
+        dd($data);
     }
 
     /**

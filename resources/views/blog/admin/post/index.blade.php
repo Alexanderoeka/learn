@@ -18,7 +18,7 @@
            */
         @endphp
             <tr @if(!$item->is_published) style="background-color:#ccc;"@endif>
-                <td>{{ $loop->iteration }}</td>
+                <td>{{ $item->id }}</td>
                 <td><a href="{{ route('admin.blog.posts.edit', $item->id) }}">{{ $item->title }}</a></td>
                 <td>{{ $item->user->name }}</td>
                 <td><a href="{{route('blog.admin.categories.edit',$item->category_id)}}">{{$item->category->title}}</a></td>

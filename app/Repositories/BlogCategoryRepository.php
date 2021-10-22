@@ -26,6 +26,7 @@ class BlogCategoryRepository extends CoreRepository
     public function getEdit($id)
     {
         return $this->startConditions()->find($id);
+
     }
     /**
      * Получить список категорий для вывода в выпадающем списке

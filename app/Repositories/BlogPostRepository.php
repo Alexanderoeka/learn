@@ -43,6 +43,25 @@ class BlogPostRepository extends CoreRepository
 
 
 
+    public function getforEdit($id)
+    {
+        $one = $this->startConditions()->select(
+            'id',
+            'category_id',
+            'user_id',
+            'title',
+            'content_raw',
+            'is_published',
+            'slug'
+        )->where('id',$id)
+        ->get();
+        $one=$one['0'];
+            return $one;
+
+    }
+
+
+
 
 
 
