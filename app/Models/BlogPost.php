@@ -28,7 +28,9 @@ class BlogPost extends Model
         'description',
         'category_id',
         'user_id',
-        'content_raw'
+        'content_raw',
+        'excerpt',
+        'content_html'
 
     ];
 

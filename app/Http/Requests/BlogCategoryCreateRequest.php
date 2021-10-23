@@ -29,6 +29,7 @@ class BlogCategoryCreateRequest extends FormRequest
             'description'=>'string|min:3|max:500',
             'parent_id' =>'integer|required|exists:blog_categories,id',
 
+
         ];
     }
 }

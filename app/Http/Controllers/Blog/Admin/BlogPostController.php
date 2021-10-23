@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Blog\Admin;
 
+use App\Http\Requests\BlogPostCreateRequest;
 use App\Models\BlogPost;
 use App\Repositories\BlogCategoryRepository;
 use App\Repositories\BlogPostRepository;
@@ -23,7 +24,6 @@ class BlogPostController extends BaseController
         $this->blogPostRepository = app(BlogPostRepository::class);
         $this->blogCategoryRepository = app(BlogCategoryRepository::class);
         $this->userRepository = app(UserRepository::class);
-
     }
     /**
      * Display a listing of the resource.
@@ -49,7 +49,7 @@ class BlogPostController extends BaseController
         $usersList = $this->userRepository->getAllUsers();
 
 
-       return view('blog.admin.post.create',compact('categoryList','usersList'));
+        return view('blog.admin.post.create', compact('categoryList', 'usersList'));
     }
 
     /**
@@ -58,9 +58,28 @@ class BlogPostController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BlogPostCreateRequest $request)
     {
+        $data = $request->all();
+        //$data['excerpt'] = 'Abobas' . rand(1,8);
+        unset($data['_token']);
+        //dd($data);
+        $data['content_html'] = $data['content_raw'];
+        //dd($data);
+        $item = new BlogPost($data);
 
+
+        $result = $item->save();
+
+
+        if ($result) {
+            return redirect(route('admin.blog.posts.edit', $item->id))
+                ->with(['success' => 'all is success'])
+                ->withInput();
+        } else {
+            return back()->withErrors(['msg' => 'Nu ti i eblan'])
+                ->withInput();
+        }
     }
 
     /**
@@ -100,24 +119,21 @@ class BlogPostController extends BaseController
         $data = $request->all();
 
         $mod =  $this->blogPostRepository->getEdit($id);
-        if(empty($mod))
-        {
+        if (empty($mod)) {
 
-                return back()
+            return back()
                 ->withErrors(['msg' => "Message id=[{$id}] didn't find", 'mmm' => 'VOT eto da'])
                 ->withInput();
-
         }
 
         $uf = $mod->fill($data)->save();
-        if($uf)
-        {
-            return redirect(route('admin.blog.posts.edit',$id))
-            ->with(['success'=>'Save is success']);
-        }else{
+        if ($uf) {
+            return redirect(route('admin.blog.posts.edit', $id))
+                ->with(['success' => 'Save is success']);
+        } else {
             return back()
-            ->withErrors(['msg' => 'Error of save'])
-            ->withInput();
+                ->withErrors(['msg' => 'Error of save'])
+                ->withInput();
         }
     }
 
