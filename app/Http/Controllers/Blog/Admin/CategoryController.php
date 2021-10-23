@@ -11,6 +11,8 @@ use App\Repositories\BlogCategoryRepository;
 use Illuminate\Support\Facades\DB;
 use App\Repository;
 
+use Illuminate\Support\Str;
+
 class CategoryController extends BaseController
 {
     /**
@@ -68,7 +70,7 @@ class CategoryController extends BaseController
         $data = $request->input();
 
         if (empty($data['slug'])) {
-            $data['slug'] = str_slug($data['title']);
+            $data['slug'] = Str::slug($data['title']);
         }
 
         $item = new BlogCategory($data);

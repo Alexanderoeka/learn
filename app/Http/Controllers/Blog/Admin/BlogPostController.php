@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Blog\Admin;
 use App\Models\BlogPost;
 use App\Repositories\BlogCategoryRepository;
 use App\Repositories\BlogPostRepository;
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use App\Http\Requests\BlogPostUpdateRequest;
 
@@ -14,11 +15,15 @@ class BlogPostController extends BaseController
 
     private $blogCategoryRepository;
 
+    private $userRepository;
+
     public function __construct()
     {
         parent::__construct();
         $this->blogPostRepository = app(BlogPostRepository::class);
         $this->blogCategoryRepository = app(BlogCategoryRepository::class);
+        $this->userRepository = app(UserRepository::class);
+
     }
     /**
      * Display a listing of the resource.
@@ -40,7 +45,11 @@ class BlogPostController extends BaseController
      */
     public function create()
     {
-        dd(__METHOD__);
+        $categoryList = $this->blogCategoryRepository->getForComboBox();
+        $usersList = $this->userRepository->getAllUsers();
+
+
+       return view('blog.admin.post.create',compact('categoryList','usersList'));
     }
 
     /**
@@ -51,7 +60,7 @@ class BlogPostController extends BaseController
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -90,15 +99,25 @@ class BlogPostController extends BaseController
     {
         $data = $request->all();
 
-        $query = new BlogPost();
-        $uf = $query->fill($data)->save();
+        $mod =  $this->blogPostRepository->getEdit($id);
+        if(empty($mod))
+        {
+
+                return back()
+                ->withErrors(['msg' => "Message id=[{$id}] didn't find", 'mmm' => 'VOT eto da'])
+                ->withInput();
+
+        }
+
+        $uf = $mod->fill($data)->save();
         if($uf)
         {
             return redirect(route('admin.blog.posts.edit',$id))
-            ->with('');
+            ->with(['success'=>'Save is success']);
         }else{
             return back()
-            ->withErrors('AAAAAAAA');
+            ->withErrors(['msg' => 'Error of save'])
+            ->withInput();
         }
     }
 
