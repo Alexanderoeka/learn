@@ -102,6 +102,9 @@ class BlogPostController extends BaseController
     public function edit($id)
     {
         $item = $this->blogPostRepository->getforEdit($id);
+        if (empty($item)) {
+            abort(404);
+        }
         $categoryList = $this->blogCategoryRepository->getForComboBox();
 
         return view('blog.admin.post.edit', compact('item', 'categoryList'));
