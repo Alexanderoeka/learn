@@ -65,6 +65,9 @@ class BlogPostController extends BaseController
         unset($data['_token']);
         //dd($data);
         $data['content_html'] = $data['content_raw'];
+        $_SESSION['old']['title'] = 'Uhaha';
+        return back()
+            ->withErrors(['ss' => 'sosi hui']);
         //dd($data);
         $item = new BlogPost($data);
 
@@ -123,7 +126,7 @@ class BlogPostController extends BaseController
         $data = $request->all();
         if (!empty($data['is_published'])) {
             $data['is_published'] = 1;
-        } else{
+        } else {
             $data['is_published'] = 0;
         }
 

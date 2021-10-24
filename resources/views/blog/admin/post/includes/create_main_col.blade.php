@@ -13,12 +13,12 @@
                     <div class="tab-pane active" id="maindata" role="tabpanel">
                         <div class="form-group">
                             <lable for="title">Title</lable>
-                            <input name="title" value="" id="title" type="text" class="form-control" minlength="3"
-                                required>
+                            <input name="title" value="{{ old('title','') }}" id="title" type="text"
+                                class="form-control" minlength="3" required>
                         </div>
                         <div class="form-group">
                             <lable for="slug">Slug</lable>
-                            <input name="slug" value="" id="slug" type="text" class="form-control">
+                            <input name="slug" value="{{ old('slug') }}" id="slug" type="text" class="form-control">
                         </div>
                         <div class="form-group">
                             <lable for="user_id">User</lable>
@@ -50,8 +50,8 @@
                         </div>
                         <div class="form-group">
                             <lable for="content_raw"> Content</lable>
-                            <textarea name="content_raw" id="content_raw" class="form-control" rows="3">
-
+                            <textarea name="content_raw" id="content_raw" class="form-control" rows="20">
+                                {{ old('content_raw') }}
                         </textarea>
                         </div>
                     </div>
