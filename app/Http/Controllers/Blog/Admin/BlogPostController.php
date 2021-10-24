@@ -119,7 +119,14 @@ class BlogPostController extends BaseController
      */
     public function update(BlogPostUpdateRequest $request, $id)
     {
+
         $data = $request->all();
+        if (!empty($data['is_published'])) {
+            $data['is_published'] = 1;
+        } else{
+            $data['is_published'] = 0;
+        }
+
 
         $mod =  $this->blogPostRepository->getEdit($id);
         if (empty($mod)) {
@@ -148,6 +155,10 @@ class BlogPostController extends BaseController
      */
     public function destroy($id)
     {
-        //
+
+        $post = $this->blogPostRepository->getforEdit($id);
+        //dd($post);
+        $post->delete();
+        return redirect('admin/blog/posts');
     }
 }

@@ -30,7 +30,8 @@ class BlogPost extends Model
         'user_id',
         'content_raw',
         'excerpt',
-        'content_html'
+        'content_html',
+        'is_published'
 
     ];
 
