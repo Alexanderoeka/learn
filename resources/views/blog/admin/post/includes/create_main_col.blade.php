@@ -13,7 +13,7 @@
                     <div class="tab-pane active" id="maindata" role="tabpanel">
                         <div class="form-group">
                             <lable for="title">Title</lable>
-                            <input name="title" value="{{ old('title','') }}" id="title" type="text"
+                            <input name="title" value="@if(!empty(session('olds'))) {{ session('olds') }} @endif" id="title" type="text"
                                 class="form-control" minlength="3" required>
                         </div>
                         <div class="form-group">

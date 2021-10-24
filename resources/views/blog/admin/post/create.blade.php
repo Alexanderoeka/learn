@@ -6,6 +6,9 @@
         @csrf
 
         <div class="container">
+            @if($errors)
+                {{$errors->first()}}
+            @endif
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     @include('blog.admin.post.includes.create_main_col')
