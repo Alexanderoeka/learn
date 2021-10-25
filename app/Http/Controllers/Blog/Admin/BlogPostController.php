@@ -169,7 +169,7 @@ class BlogPostController extends BaseController
     public function destroy($id)
     {
 
-        $post = $this->blogPostRepository->getforEdit($id);
+        $post = $this->blogPostRepository->getEdit($id);
         //dd($post);
         $post->delete();
         return redirect('admin/blog/posts');

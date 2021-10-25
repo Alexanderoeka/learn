@@ -28,7 +28,7 @@ class BlogPostUpdateRequest extends FormRequest
             'slug' => 'max:200',
             'category_id' => 'integer|required|exists:blog_categories,id',
             'user_id' => 'integer|required|exists:users,id',
-            'content_raw' => 'string|min:3|max:5000',
+            'content_raw' => 'string|min:3|max:10000',
             'excerpt' => 'string',
             'is_published'=>'string'
         ];
