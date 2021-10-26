@@ -9,6 +9,8 @@ use App\Repositories\BlogPostRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use App\Http\Requests\BlogPostUpdateRequest;
+use Illuminate\Support\Str;
+use Illuminate\Support\Carbon;
 
 class BlogPostController extends BaseController
 {
@@ -139,17 +141,25 @@ class BlogPostController extends BaseController
         } else {
             $data['is_published'] = 0;
         }
+        if (empty($data['slug'])) {
+            $data['slug'] = Str::slug($data['title']);
+        }
+        $item =  $this->blogPostRepository->getEdit($id);
+
+        if (empty($item->published_at) && $data['is_published']) {
+            $data['published_at'] = Carbon::now();
+        }
 
 
-        $mod =  $this->blogPostRepository->getEdit($id);
-        if (empty($mod)) {
+
+        if (empty($item)) {
 
             return back()
                 ->withErrors(['msg' => "Message id=[{$id}] didn't find", 'mmm' => 'VOT eto da'])
                 ->withInput();
         }
 
-        $uf = $mod->fill($data)->save();
+        $uf = $item->update($data);
         if ($uf) {
             return redirect(route('admin.blog.posts.edit', $id))
                 ->with(['success' => 'Save is success']);

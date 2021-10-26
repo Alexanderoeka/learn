@@ -31,7 +31,8 @@ class BlogPost extends Model
         'content_raw',
         'excerpt',
         'content_html',
-        'is_published'
+        'is_published',
+        'published_at'
 
     ];
 
