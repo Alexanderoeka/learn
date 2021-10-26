@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\BlogPost;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 
 class BlogPostObserver
 {
@@ -11,7 +12,6 @@ class BlogPostObserver
 
     public function creating(BlogPost $blogPost)
     {
-
     }
     /**
      * Handle the blog post "created" event.
@@ -25,13 +25,33 @@ class BlogPostObserver
     }
 
 
-//Перед обновлением записи
+    //Перед обновлением записи
     public function updating(BlogPost $blogPost)
     {
+        $test[] = $blogPost->isDirty();
+        $test[] = $blogPost->getAttribute('is_published');
+        $test[] = $blogPost->getOriginal('title');
 
+
+        dd($blogPost->is_published);
+
+
+        $this->setPublishedAt($blogPost);
+        $this->setSlug($blogPost);
     }
 
-    //protected function setPubli
+    protected function setPublishedAt(BlogPost $blogPost)
+    {
+        if (empty($blogPost->published_at) && $blogPost->is_published) {
+            $blogPost->published_at = Carbon::now();
+        }
+    }
+    protected function setSlug(BlogPost $blogPost)
+    {
+        if (empty($blogPost->slug)) {
+            $blogPost->slug = Str::slug($blogPost->title);
+        }
+    }
 
 
     /**

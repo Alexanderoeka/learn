@@ -136,21 +136,11 @@ class BlogPostController extends BaseController
     {
 
         $data = $request->all();
-        if (!empty($data['is_published'])) {
-            $data['is_published'] = 1;
-        } else {
-            $data['is_published'] = 0;
-        }
-        if (empty($data['slug'])) {
-            $data['slug'] = Str::slug($data['title']);
-        }
+
+        $request->isPublished($data);
+
+
         $item =  $this->blogPostRepository->getEdit($id);
-
-        if (empty($item->published_at) && $data['is_published']) {
-            $data['published_at'] = Carbon::now();
-        }
-
-
 
         if (empty($item)) {
 
