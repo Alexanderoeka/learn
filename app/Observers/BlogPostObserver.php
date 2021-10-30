@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Models\BlogCategory;
 use App\Models\BlogPost;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
@@ -12,6 +13,9 @@ class BlogPostObserver
 
     public function creating(BlogPost $blogPost)
     {
+        $this->setSlug($blogPost);
+        $this->setPublishedAt($blogPost);
+
     }
     /**
      * Handle the blog post "created" event.
@@ -33,7 +37,7 @@ class BlogPostObserver
         $test[] = $blogPost->getOriginal('title');
 
 
-        dd($blogPost->is_published);
+
 
 
         $this->setPublishedAt($blogPost);
@@ -52,6 +56,8 @@ class BlogPostObserver
             $blogPost->slug = Str::slug($blogPost->title);
         }
     }
+
+
 
 
     /**

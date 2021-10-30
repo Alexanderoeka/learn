@@ -61,17 +61,10 @@ class CategoryController extends BaseController
      */
     public function store(BlogCategoryCreateRequest $request)
     {
-        /*  $arr = $request->all();
-        unset($arr['_token']);
 
-       DB::table('blog_categories')->insert($arr);
-       return back()->with(['msg'=>'all well!!'])->withInput();
-       */
         $data = $request->input();
 
-        if (empty($data['slug'])) {
-            $data['slug'] = Str::slug($data['title']);
-        }
+
 
         $item = new BlogCategory($data);
 
@@ -125,7 +118,7 @@ class CategoryController extends BaseController
     {
 
 
-        //$validateData=$this->validate($request,$request->rules());
+
 
 
 

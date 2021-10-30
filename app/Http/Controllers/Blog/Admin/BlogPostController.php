@@ -137,7 +137,7 @@ class BlogPostController extends BaseController
 
         $data = $request->all();
 
-        $request->isPublished($data);
+        $request->setIsPublished($data);
 
 
         $item =  $this->blogPostRepository->getEdit($id);

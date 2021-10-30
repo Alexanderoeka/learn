@@ -34,7 +34,7 @@ class BlogPostUpdateRequest extends FormRequest
         ];
     }
 
-    public function isPublished(&$data)
+    public function setIsPublished(&$data)
     {
         if (!empty($data['is_published'])) {
             $data['is_published'] = 1;
