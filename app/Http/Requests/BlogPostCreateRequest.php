@@ -24,12 +24,26 @@ class BlogPostCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'=>'required|min:3|max:30',
-            'slug'=>'required|min:3|max:30',
-            'user_id' =>'integer|required|exists:users,id',
-            'category_id'=>'integer|required|exists:blog_categories,id',
-           'content_raw' =>'string|min:3|max:5000',
-           'excerpt'=>'string'
+            'title' => 'required|min:3|max:200|unique:blog_posts',
+            'slug' => 'max:200',
+            'user_id' => 'integer|required|exists:users,id',
+            'category_id' => 'integer|required|exists:blog_categories,id',
+            'content_raw' => 'string|min:3|max:10000',
+            'excerpt' => 'string'
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'title.required' => 'Enter title of post',
+            'content_raw.min' => 'Min length of post is [:min] symvols'
+        ];
+    }
+    public function attribute()
+    {
+
+        return [
+            'title' => 'Заголовок'
         ];
     }
 }

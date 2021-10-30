@@ -6,8 +6,10 @@
         @csrf
 
         <div class="container">
-            @if($errors)
-                {{$errors->first()}}
+            @if ($errors)
+                @foreach ($errors->all() as $errorTxt)
+                    {{ $errorTxt }}
+                @endforeach
             @endif
             <div class="row justify-content-center">
                 <div class="col-md-8">

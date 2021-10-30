@@ -48,11 +48,7 @@ class BlogPostController extends BaseController
      */
     public function create()
     {
-        if (session('check') == 1) {
-            session(['check' => 0]);
-        } else if (session('check') == 0) {
-            session()->forget('olds');
-        }
+
 
         $categoryList = $this->blogCategoryRepository->getForComboBox();
         $usersList = $this->userRepository->getAllUsers();
@@ -71,18 +67,15 @@ class BlogPostController extends BaseController
     {
 
         $data = $request->all();
-        //$data['excerpt'] = 'Abobas' . rand(1,8);
-        unset($data['_token']);
-        //dd($data);
+
+
+
         $data['content_html'] = $data['content_raw'];
-        session(['olds' => 'I love to suck dicks', 'check' => 1]);
 
-        //dd($_SESSION);
-        return back()
-            ->withErrors(['ss' => 'sosi hui']);
-        //dd($data);
+
+
         $item = new BlogPost($data);
-
+        //$item = (new BlogPost())->create($data);
 
         $result = $item->save();
 
