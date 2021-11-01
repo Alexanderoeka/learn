@@ -9,10 +9,16 @@ class BlogCategory extends Model
 {
     use SoftDeletes;
     protected $fillable
-    =[
+    = [
         'title',
         'slug',
         'parent_id',
         'description',
     ];
+
+    //Получить родительскую категорию
+    public function parentCategory()
+    {
+        return $this->belongsTo(BlogCategory::class, 'parent_id', 'id');
+    }
 }

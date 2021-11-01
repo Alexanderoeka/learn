@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class BlogPost extends Model
 {
     use SoftDeletes;
+    const UNKNOWN_USER = 1;
 
     public function category()
     {
@@ -21,7 +22,7 @@ class BlogPost extends Model
         return $this->belongsTo(User::class);
     }
     protected $fillable
-    =[
+    = [
         'title',
         'slug',
         'parent_id',
@@ -35,5 +36,4 @@ class BlogPost extends Model
         'published_at'
 
     ];
-
 }

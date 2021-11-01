@@ -14,8 +14,22 @@ class BlogPostObserver
     public function creating(BlogPost $blogPost)
     {
         $this->setSlug($blogPost);
-        $this->setPublishedAt($blogPost);
 
+        $this->setPublishedAt($blogPost);
+        $this->setHtml($blogPost);
+        $this->setUser($blogPost);
+    }
+    protected function setHtml(BlogPost $blogPost)
+    {
+        if ($blogPost->isDirty('content_raw')) {
+            //markdown
+            $blogPost->content_html = $blogPost->content_raw;
+        }
+    }
+
+    protected function setUser(BlogPost $blogPost)
+    {
+        $blogPost->user_id = auth()->id() ?? BlogPost::UNKNOWN_USER;
     }
     /**
      * Handle the blog post "created" event.
@@ -52,6 +66,7 @@ class BlogPostObserver
     }
     protected function setSlug(BlogPost $blogPost)
     {
+
         if (empty($blogPost->slug)) {
             $blogPost->slug = Str::slug($blogPost->title);
         }
