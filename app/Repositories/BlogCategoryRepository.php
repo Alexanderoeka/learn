@@ -26,22 +26,23 @@ class BlogCategoryRepository extends CoreRepository
     public function getEdit($id)
     {
         return $this->startConditions()->find($id);
-
     }
     /**
      * Получить список категорий для вывода в выпадающем списке
      */
     public function getForComboBox()
     {
-        $fields= implode(', ', ['id','CONCAT(id,". ", title) AS id_title']);
+        $fields = implode(', ', ['id', 'CONCAT(id,". ", title) AS id_title']);
 
 
         $result = $this
-        ->startConditions()
-        ->select('id',
-        DB::raw('CONCAT(id,\'. \',title) AS id_title'))
-        ->toBase()
-        ->get();
+            ->startConditions()
+            ->select(
+                'id',
+                DB::raw('CONCAT(id,\'. \',title) AS id_title')
+            )
+            ->toBase()
+            ->get();
 
 
 
@@ -50,11 +51,14 @@ class BlogCategoryRepository extends CoreRepository
 
     public function getAllWithpaginate($amount = null)
     {
-        $fields = ['id','title','parent_id'];
+        $fields = ['id', 'title', 'parent_id'];
 
-        $result =$this->startConditions()
-        ->select($fields)
-        ->paginate($amount);
+        $result = $this->startConditions()
+            ->select($fields)
+            ->with(['parentCategory' => function ($query) {
+                $query->select(['id','title']);
+            }])
+            ->paginate($amount);
 
 
         return $result;
