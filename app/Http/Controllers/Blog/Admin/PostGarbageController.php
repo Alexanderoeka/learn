@@ -20,14 +20,19 @@ class PostGarbageController extends BaseController
     public function index()
     {
         $listofTrash = $this->blogPostGarbageRepository->getTrashPaginate(10);
-        return view('blog.admin.post.garbage.index',compact('listofTrash'));
+        return view('blog.admin.post.garbage.index', compact('listofTrash'));
     }
     public function delete()
     {
         dd(__METHOD__);
     }
-    public function restore()
+    public function restore($id)
     {
-        dd(__METHOD__);
+
+        $piece = $this->blogPostGarbageRepository->getOneTrash($id);
+        dd($piece);
+        $piece->deleted_at = null;
+        $piece->fill()->save();
+        dd($piece);
     }
 }

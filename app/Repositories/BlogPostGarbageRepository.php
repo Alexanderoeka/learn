@@ -20,4 +20,12 @@ class BlogPostGarbageRepository extends CoreRepository
             ->paginate($amount);
         return $query;
     }
+
+    public function getOneTrash($id)
+    {
+        $query = $this->startConditions()->onlyTrashed()
+            ->where('id', $id)
+            ->get();
+        return $query;
+    }
 }
