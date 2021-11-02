@@ -53,5 +53,5 @@ Route::group(['namespace' => 'Blog\Admin', 'prefix' => 'admin/blog'], function (
 });
 
 Route::get('admin/blog/posts/garbage', 'Blog\Admin\PostGarbageController@index')->name('admin.blog.posts.garbage');
-Route::get('admin/blog/posts/garbage/{post}/delete','Blog\Admin\PostGarbageController@delete');
-Route::get('admin/blog/posts/garbage/{post}/restore','Blog\Admin\PostGarbageController@restore');
+Route::get('admin/blog/posts/garbage/{post}/delete','Blog\Admin\PostGarbageController@delete')->name('admin.blog.posts.garbage.delete');
+Route::get('admin/blog/posts/garbage/{post}/restore','Blog\Admin\PostGarbageController@restore')->name('admin.blog.posts.garbage.restore');

@@ -15,12 +15,12 @@ class PostGarbageController extends BaseController
     {
 
         $this->blogPostGarbageRepository = new BlogPostGarbageRepository();
-
     }
 
     public function index()
     {
-        $listofTrash = $this->blogPostGarbageRepository;
+        $listofTrash = $this->blogPostGarbageRepository->getTrashPaginate(10);
+        return view('blog.admin.post.garbage.index',compact('listofTrash'));
     }
     public function delete()
     {
