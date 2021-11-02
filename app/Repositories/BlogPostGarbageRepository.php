@@ -23,9 +23,11 @@ class BlogPostGarbageRepository extends CoreRepository
 
     public function getOneTrash($id)
     {
+
         $query = $this->startConditions()->onlyTrashed()
-            ->where('id', $id)
-            ->get();
+            ->where('id',$id)
+            ->first();
+
         return $query;
     }
 }

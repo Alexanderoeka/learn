@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Blog\Admin;
 
 use App\Repositories\BlogPostGarbageRepository;
-
+use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 
 class PostGarbageController extends BaseController
@@ -30,9 +30,9 @@ class PostGarbageController extends BaseController
     {
 
         $piece = $this->blogPostGarbageRepository->getOneTrash($id);
-        dd($piece);
-        $piece->deleted_at = null;
-        $piece->fill()->save();
-        dd($piece);
+
+        $piece->restore();
+
+        return back();
     }
 }

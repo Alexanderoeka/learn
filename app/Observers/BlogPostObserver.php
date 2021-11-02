@@ -50,7 +50,7 @@ class BlogPostObserver
         $test[] = $blogPost->getAttribute('is_published');
         $test[] = $blogPost->getOriginal('title');
 
-        dd('ahaahaha');
+
 
 
 
