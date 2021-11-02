@@ -97,7 +97,12 @@ class CategoryController extends BaseController
      */
     public function edit($id, BlogCategoryRepository $categoryRepository)
     {
+
         $item = $categoryRepository->getEdit($id);
+        $v['title_before'] = $item->title;
+        $item->title = 'ADPOPKAVsadfe POPKU sfd 1241';
+        $v['title_after'] =$item->title;
+        $v['attribute'] = $item->getAttribute('title');
 
         if (empty($item)) {
             abort(404);
