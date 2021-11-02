@@ -48,6 +48,10 @@ Route::group($groupData, function () {
 
 
 
-Route::group(['namespace'=>'Blog\Admin','prefix'=>'admin/blog'],function(){
-    Route::resource('posts','BlogPostController')->except('show')->names('admin.blog.posts');
+Route::group(['namespace' => 'Blog\Admin', 'prefix' => 'admin/blog'], function () {
+    Route::resource('posts', 'BlogPostController')->except('show')->names('admin.blog.posts');
 });
+
+Route::get('admin/blog/posts/garbage', 'Blog\Admin\PostGarbageController@index')->name('admin.blog.posts.garbage');
+Route::get('admin/blog/posts/garbage/{post}/delete','Blog\Admin\PostGarbageController@delete');
+Route::get('admin/blog/posts/garbage/{post}/restore','Blog\Admin\PostGarbageController@restore');
