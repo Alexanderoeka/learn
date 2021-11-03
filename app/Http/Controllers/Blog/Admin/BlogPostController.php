@@ -163,7 +163,7 @@ class BlogPostController extends BaseController
     {
 
         $post = $this->blogPostRepository->getEdit($id);
-        //dd($post);
+
         $post->delete();
         return redirect('admin/blog/posts');
     }

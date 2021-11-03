@@ -86,6 +86,12 @@ class BlogPostObserver
         //
     }
 
+    public function deleting(BlogPost $blogPost)
+    {
+
+
+
+    }
     /**
      * Handle the blog post "deleted" event.
      *
@@ -94,7 +100,6 @@ class BlogPostObserver
      */
     public function deleted(BlogPost $blogPost)
     {
-        //
     }
 
     /**

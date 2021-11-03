@@ -22,9 +22,12 @@ class PostGarbageController extends BaseController
         $listofTrash = $this->blogPostGarbageRepository->getTrashPaginate(10);
         return view('blog.admin.post.garbage.index', compact('listofTrash'));
     }
-    public function delete()
+    public function delete($id)
     {
-        dd(__METHOD__);
+        $piece = $this->blogPostGarbageRepository->getOneTrash($id);
+
+        $piece->forceDelete();
+        return redirect()->route('admin.blog.posts.garbage');
     }
     public function restore($id)
     {

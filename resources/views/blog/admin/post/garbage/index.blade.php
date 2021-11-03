@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<a class="btn btn-primary" href="{{route('admin.blog.posts.index')}}">Posts</a>
 
     <table class="list-group list-group-flush table bib table-hover "   style="{{--background-color:white--}}">
         <tr>
@@ -25,6 +26,7 @@
                 <td>{{ $item->published_at ? \Carbon\Carbon::parse($item->published_at)->format('d.M H:i'):''}}</td>
                 <td>{{$item->deleted_at ? \Carbon\Carbon::parse($item->deleted_at)->format('d.M H:i'):''}}</td>
                 <td><a class="btn btn-primary" href="{{route('admin.blog.posts.garbage.restore',$item->id)}}"> Restore</a></td>
+                <td><a class="btn btn-primary" href="{{route('admin.blog.posts.garbage.delete',$item->id)}}">Completely remove</a></td>
             </tr>
         @endforeach
 

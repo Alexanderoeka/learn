@@ -2,6 +2,7 @@
 @section('content')
 <nav class="navbar" >
     <a class="btn btn-primary" href="{{route('admin.blog.posts.create')}}">Create post</a>
+    <a class="btn btn-primary" href="{{route('admin.blog.posts.garbage')}}">Garbage</a>
 </nav>
     <table class="list-group list-group-flush table bib table-hover "   style="{{--background-color:white--}}">
         <tr>
