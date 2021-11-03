@@ -26,8 +26,10 @@ class BlogPostGarbageRepository extends CoreRepository
 
         $query = $this->startConditions()->onlyTrashed()
             ->where('id',$id)
-            ->first();
+            ->get();
 
-        return $query;
+
+
+        return $query[0];
     }
 }
