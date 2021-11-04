@@ -74,7 +74,7 @@ class BlogPostController extends BaseController
 
 
 
-        $item = new BlogPost($data);
+        $item =BlogPost::create($data);
         //$item = (new BlogPost())->create($data);
 
         $result = $item->save();
