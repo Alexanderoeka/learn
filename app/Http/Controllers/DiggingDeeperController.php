@@ -37,11 +37,22 @@ class DiggingDeeperController extends Controller
 
         //dd($collection);
 
+
+
         $result['where']['data'] = $collection
             ->where('category_id', 3)
-            ->where('deleted_at', '!=', null)
-            ->values()
+            // ->values();
             ->keyBy('id');
-        dd($result);
+            $result['where']['haaa'] = $result['where']['data']->merge(collect(['dd','adfsaf','sdggghaf',234,'adf'=>['eqwrg',112,'eagetrh']]));
+
+        $result['where']['count']  = $result['where']['haaa']->count();
+       // $collection->transform();
+
+        $bol1= null;
+        $bol2 = 'one';
+        dd(is_null($bol1),is_null($bol2));
+        dd($result['where']);
+
+
     }
 }
